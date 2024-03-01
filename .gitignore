@@ -1,6 +1,6 @@
 # Dependências
-/node_modules
-/.pnp
+node_modules
+.pnp
 .pnp.js
 
 # Logs
@@ -13,18 +13,18 @@ yarn-error.log*
 .env.test
 
 # Diretório de build
-/dist
+dist
 
 # Prisma
-/prisma/.env
-/prisma/dev.db
-/prisma/migrations
+prisma/.env
+prisma/dev.db
+prisma/migrations
 
 # Arquivos do sistema operacional
 .DS_Store
 Thumbs.db
 
 # Arquivos do editor
-/.idea
+.idea
 *.iml
 .vscode/
