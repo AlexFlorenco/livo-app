@@ -16,9 +16,9 @@ yarn-error.log*
 dist
 
 # Prisma
-prisma/.env
-prisma/dev.db
-prisma/migrations
+/prisma/migrations
+/prisma/dev.db
+/prisma/.env
 
 # Arquivos do sistema operacional
 .DS_Store
