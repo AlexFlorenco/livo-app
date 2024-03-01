@@ -10,14 +10,20 @@ exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const user_module_1 = require("./infra/http/modules/user/user.module");
 const database_module_1 = require("./infra/database/database.module");
+const auth_module_1 = require("./infra/http/modules/auth/auth.module");
+const core_1 = require("@nestjs/core");
+const jwtAuth_guard_1 = require("./infra/http/modules/auth/guards/jwtAuth.guard");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [database_module_1.DatabaseModule, user_module_1.UserModule],
+        imports: [database_module_1.DatabaseModule, user_module_1.UserModule, auth_module_1.AuthModule],
         controllers: [],
-        providers: [],
+        providers: [{
+                provide: core_1.APP_GUARD,
+                useClass: jwtAuth_guard_1.JwtAuthGuard,
+            }],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map

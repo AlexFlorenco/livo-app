@@ -1,9 +1,6 @@
 export declare class User {
-    private _id;
-    private _nome;
-    private _email;
-    private _senha;
-    constructor(nome: string, email: string, senha: string);
+    private props;
+    constructor(nome: string, email: string, senha: string, id?: string);
     get id(): string;
     get nome(): string;
     set nome(nome: string);

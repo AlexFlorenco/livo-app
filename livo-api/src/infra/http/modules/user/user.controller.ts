@@ -1,7 +1,8 @@
 import { Body, Controller, Post } from "@nestjs/common";
 import { CreateUserBody } from "./dtos/createUserBody";
 import { User } from "src/modules/user/entities/User";
-import { UserRepository } from "src/infra/database/prisma/repositories/UserRepository";
+import { UserRepository } from "src/infra/database/repositories/UserRepository";
+import { Public } from "../auth/decorators/isPublic";
 
 @Controller('users')
 export class UserController {
@@ -9,6 +10,7 @@ export class UserController {
 
     // Extrai as constantes do body, cria um novo objeto User, e manda para o repository criar o usuário no banco
     @Post()
+    @Public()
     async createPost(@Body() body: CreateUserBody) {
         const { nome, email, senha } = body;
 

@@ -16,7 +16,8 @@ exports.UserController = void 0;
 const common_1 = require("@nestjs/common");
 const createUserBody_1 = require("./dtos/createUserBody");
 const User_1 = require("../../../../modules/user/entities/User");
-const UserRepository_1 = require("../../../database/prisma/repositories/UserRepository");
+const UserRepository_1 = require("../../../database/repositories/UserRepository");
+const isPublic_1 = require("../auth/decorators/isPublic");
 let UserController = class UserController {
     constructor(userRepository) {
         this.userRepository = userRepository;
@@ -35,6 +36,7 @@ let UserController = class UserController {
 exports.UserController = UserController;
 __decorate([
     (0, common_1.Post)(),
+    (0, isPublic_1.Public)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [createUserBody_1.CreateUserBody]),

@@ -3,32 +3,32 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 const crypto_1 = require("crypto");
 class User {
-    constructor(nome, email, senha) {
-        this._id = (0, crypto_1.randomUUID)();
-        this._nome = nome;
-        this._email = email;
-        this._senha = senha;
+    constructor(nome, email, senha, id = (0, crypto_1.randomUUID)()) {
+        this.props = {
+            nome, email, senha, id,
+        };
     }
+    ;
     get id() {
-        return this._id;
+        return this.props.id;
     }
     get nome() {
-        return this._nome;
+        return this.props.nome;
     }
     set nome(nome) {
-        this._nome = nome;
+        this.props.nome = nome;
     }
     get email() {
-        return this._email;
+        return this.props.email;
     }
     set email(email) {
-        this._email = email;
+        this.props.email = email;
     }
     get senha() {
-        return this._senha;
+        return this.props.senha;
     }
     set senha(senha) {
-        this._senha = senha;
+        this.props.senha = senha;
     }
 }
 exports.User = User;

@@ -1,5 +1,5 @@
 import { CreateUserBody } from "./dtos/createUserBody";
-import { UserRepository } from "src/infra/database/prisma/repositories/UserRepository";
+import { UserRepository } from "src/infra/database/repositories/UserRepository";
 export declare class UserController {
     private userRepository;
     constructor(userRepository: UserRepository);
