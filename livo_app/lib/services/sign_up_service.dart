@@ -1,14 +1,16 @@
 import 'package:dio/dio.dart';
-import 'package:livo_app/shared/constants/routes.dart';
+
+import '../shared/constants/routes.dart';
+import 'http_error_messages.dart';
 
 class SignUpService {
-  Future<void> signUp(String nome, String email, String senha) async {
+  Future<ResultCodes> signUp(String nome, String email, String senha) async {
     final dio = Dio();
-    const url = Routes.urlSignUp;
+    const urlSignUp = Routes.urlSignUp;
 
     try {
       final response = await dio.post(
-        url,
+        urlSignUp,
         data: {
           'nome': nome,
           'email': email,
@@ -17,13 +19,15 @@ class SignUpService {
       );
 
       if (response.statusCode == 201) {
-        print('Cadastro bem sucedido');
-        print('ID: ${response.data['id']}');
-      } else {
-        print('Falha no cadastro');
+        return ResultCodes.success;
       }
-    } catch (e) {
-      print('Erro: $e');
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 500) {
+        return ResultCodes.emailAlredyExists;
+      } else if (e.response?.statusCode == null) {
+        return ResultCodes.offlineServer;
+      }
     }
+    return ResultCodes.unknownError;
   }
 }
