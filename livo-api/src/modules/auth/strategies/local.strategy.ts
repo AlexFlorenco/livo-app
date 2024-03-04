@@ -13,7 +13,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     }
 
     async validate(email: string, senha: string) {
-        const user = await this.userRepository.findByEmail(email);
+        const user = await this.userRepository.findUser(email);
 
         if (user) {
             if (senha == user.senha) return user;
