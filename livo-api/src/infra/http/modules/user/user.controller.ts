@@ -1,13 +1,13 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UseInterceptors } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put, UseFilters, UseInterceptors } from "@nestjs/common";
 import { CreateUserDTO } from "./dtos/CreateUser.dto";
 import { User } from "src/modules/user/entities/User";
 import { UserRepository } from "src/infra/database/repositories/UserRepository";
 import { Public } from "../auth/decorators/isPublic";
 import { UpdateUserDTO } from "./dtos/UpdateUser.dto";
-import { PrismaUserErrorInterceptor } from "src/infra/database/interceptors/PrismaUserErrorInterceptor";
+import { UserExceptionFilter } from "src/infra/http/modules/user/filters/UserExceptionFilter";
 
 @Controller('users')
-@UseInterceptors(PrismaUserErrorInterceptor)
+@UseFilters(new UserExceptionFilter)
 export class UserController {
     constructor(private userRepository: UserRepository) { }
 
