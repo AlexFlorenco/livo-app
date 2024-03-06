@@ -1,33 +1,32 @@
-import 'package:dio/dio.dart';
+import 'dart:convert' as convert;
+import 'package:http/http.dart' as http;
 
 import '../shared/constants/routes.dart';
-import 'http_error_messages.dart';
 
 class SignUpService {
-  Future<ResultCodes> signUp(String nome, String email, String senha) async {
-    final dio = Dio();
+  Future<Map<String, dynamic>?> signUp(
+      String nome, String email, String senha) async {
     const urlSignUp = Routes.urlSignUp;
-
     try {
-      final response = await dio.post(
-        urlSignUp,
-        data: {
+      var response = await http.post(
+        Uri.parse(urlSignUp),
+        body: {
           'nome': nome,
           'email': email,
           'senha': senha,
         },
       );
 
-      if (response.statusCode == 201) {
-        return ResultCodes.success;
+      var jsonResponse =
+          convert.jsonDecode(response.body) as Map<String, dynamic>;
+
+      if (response.statusCode != 201) {
+        return jsonResponse;
       }
-    } on DioException catch (e) {
-      if (e.response?.statusCode == 500) {
-        return ResultCodes.emailAlredyExists;
-      } else if (e.response?.statusCode == null) {
-        return ResultCodes.offlineServer;
-      }
+    } catch (e) {
+      return {"message": "Erro interno"};
     }
-    return ResultCodes.unknownError;
+
+    return null;
   }
 }

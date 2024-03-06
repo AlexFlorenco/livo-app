@@ -1,35 +1,27 @@
 import 'package:flutter/material.dart';
 
-import '../services/http_error_messages.dart';
-import '../services/sign_in_service.dart';
 import '../services/sign_up_service.dart';
 
 class SignUpController {
-  Future<ResultCodes> signUp(
-    GlobalKey<FormState> formKey,
-    TextEditingController nameController,
-    TextEditingController emailController,
-    TextEditingController passwordController,
-    TextEditingController passwordConfirmationController,
-  ) async {
-    if (passwordController.text != passwordConfirmationController.text) {
-      return ResultCodes.passwordsDoNotMatch;
-    } else if (!formKey.currentState!.validate()) {
-      return ResultCodes.invalidForm;
+  Future<String?> signUp({
+    required GlobalKey<FormState> formKey,
+    required String name,
+    required String email,
+    required String password,
+    required String passwordConfirmation,
+  }) async {
+    if (!formKey.currentState!.validate()) {
+      return "Formulário inválido";
+    } else if (password != passwordConfirmation) {
+      return "As senhas não coincidem";
     }
 
-    ResultCodes result = await SignUpService().signUp(
-      nameController.text,
-      emailController.text,
-      passwordController.text,
-    );
+    var response = await SignUpService().signUp(name, email, password);
 
-    if (result == ResultCodes.success) {
-      result = await SignInService().signIn(
-        emailController.text,
-        passwordController.text,
-      );
+    if (response != null) {
+      return response["message"];
     }
-    return result;
+
+    return null;
   }
 }

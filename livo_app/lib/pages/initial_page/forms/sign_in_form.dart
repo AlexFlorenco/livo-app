@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../controllers/sign_in_controller.dart';
-import '../../../services/http_error_messages.dart';
 import '../../../shared/constants/livo_colors.dart';
 import '../../../widgets/livo_email_form_field.dart';
 import '../../../widgets/livo_password_form_field.dart';
@@ -46,28 +45,28 @@ class _SignInFormState extends State<SignInForm> {
           const SizedBox(height: 22),
           LivoTextButtonBG(
             onPressed: () async {
-              ResultCodes result = await controller.signIn(
-                _formKey,
-                _emailController,
-                _passwordController,
-              );
+              // ResultCodes result = await controller.signIn(
+              //   _formKey,
+              //   _emailController,
+              //   _passwordController,
+              // );
 
-              String? messageError =
-                  HTTPErrorMessages.describeResultCodes(result);
+              // String? messageError =
+              //     HTTPErrorMessages.describeResultCodes(result);
 
-              messageError == null
-                  ? Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const HomePage(),
-                      ),
-                    )
-                  : ScaffoldMessenger.of(context).showSnackBar(
-                      LivoSnackbar(
-                        feedbackColor: LivoColors.dangerColor,
-                        message: messageError,
-                      ),
-                    );
+              // messageError == null
+              //     ? Navigator.push(
+              //         context,
+              //         MaterialPageRoute(
+              //           builder: (_) => const HomePage(),
+              //         ),
+              //       )
+              //     : ScaffoldMessenger.of(context).showSnackBar(
+              //         LivoSnackbar(
+              //           feedbackColor: LivoColors.dangerColor,
+              //           message: messageError,
+              //         ),
+              //       );
             },
             label: 'Entrar',
           ),

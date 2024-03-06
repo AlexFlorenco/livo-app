@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../controllers/sign_up_controller.dart';
-import '../../../services/http_error_messages.dart';
 import '../../../shared/constants/livo_colors.dart';
 import '../../../widgets/livo_email_form_field.dart';
 import '../../../widgets/livo_password_form_field.dart';
@@ -10,7 +9,6 @@ import '../../../widgets/livo_text_button.dart';
 import '../../../widgets/livo_text_button_bg.dart';
 import '../../../widgets/livo_text_form_field.dart';
 import '../../../widgets/snackbar.dart';
-import '../../home_page/home_page.dart';
 import '../store/initial_page_store.dart';
 
 class SignUpForm extends StatefulWidget {
@@ -62,28 +60,25 @@ class _SignUpFormState extends State<SignUpForm> {
           const SizedBox(height: 22),
           LivoTextButtonBG(
             onPressed: () async {
-              ResultCodes result = await controller.signUp(
-                _formKey,
-                _nameController,
-                _emailController,
-                _passwordController,
-                _passwordConfirmationController,
+              String? apiResponse = await controller.signUp(
+                formKey: _formKey,
+                name: _nameController.text,
+                email: _emailController.text,
+                password: _passwordController.text,
+                passwordConfirmation: _passwordConfirmationController.text,
               );
 
-              String? messageError =
-                  HTTPErrorMessages.describeResultCodes(result);
-
-              messageError == null
-                  ? Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const HomePage(),
+              apiResponse != null
+                  ? ScaffoldMessenger.of(context).showSnackBar(
+                      LivoSnackbar(
+                        feedbackColor: LivoColors.dangerColor,
+                        message: apiResponse,
                       ),
                     )
                   : ScaffoldMessenger.of(context).showSnackBar(
                       LivoSnackbar(
-                        feedbackColor: LivoColors.dangerColor,
-                        message: messageError,
+                        feedbackColor: LivoColors.successColor,
+                        message: "Conta criada com sucesso!",
                       ),
                     );
             },
