@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:result_dart/result_dart.dart';
 
 import '../../../controllers/sign_in_controller.dart';
 import '../../../shared/constants/livo_colors.dart';
@@ -45,28 +46,28 @@ class _SignInFormState extends State<SignInForm> {
           const SizedBox(height: 22),
           LivoTextButtonBG(
             onPressed: () async {
-              // ResultCodes result = await controller.signIn(
-              //   _formKey,
-              //   _emailController,
-              //   _passwordController,
-              // );
+              var result = await controller.signIn(
+                _formKey,
+                _emailController,
+                _passwordController,
+              );
 
-              // String? messageError =
-              //     HTTPErrorMessages.describeResultCodes(result);
-
-              // messageError == null
-              //     ? Navigator.push(
-              //         context,
-              //         MaterialPageRoute(
-              //           builder: (_) => const HomePage(),
-              //         ),
-              //       )
-              //     : ScaffoldMessenger.of(context).showSnackBar(
-              //         LivoSnackbar(
-              //           feedbackColor: LivoColors.dangerColor,
-              //           message: messageError,
-              //         ),
-              //       );
+              result.fold(
+                  (success) => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => HomePage(
+                            idUser: success["id"],
+                            nameUser: success["nome"],
+                          ),
+                        ),
+                      ),
+                  (failure) => ScaffoldMessenger.of(context).showSnackBar(
+                        LivoSnackbar(
+                          feedbackColor: LivoColors.dangerColor,
+                          message: failure["message"]!,
+                        ),
+                      ));
             },
             label: 'Entrar',
           ),

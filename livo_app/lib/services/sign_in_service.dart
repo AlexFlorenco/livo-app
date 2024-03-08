@@ -1,36 +1,30 @@
-// import 'package:dio/dio.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert' as convert;
+import 'package:http/http.dart' as http;
+import 'package:result_dart/result_dart.dart';
 
-// import '../shared/constants/routes.dart';
-// import 'http_error_messages.dart';
+import '../shared/constants/routes.dart';
 
-// class SignInService {
-//   Future<ResultCodes> signIn(String email, String senha) async {
-//     final dio = Dio();
-//     const urlSignIn = Routes.urlSignIn;
+class SignInService {
+  AsyncResult<Map<String, dynamic>, Map<String, dynamic>> signIn(
+      String email, String senha) async {
+    const urlSignIn = Routes.urlSignIn;
 
-//     try {
-//       final response = await dio.post(
-//         urlSignIn,
-//         data: {
-//           'email': email,
-//           'senha': senha,
-//         },
-//       );
+    try {
+      var response = await http.post(
+        Uri.parse(urlSignIn),
+        body: {
+          'email': email,
+          'senha': senha,
+        },
+      );
 
-//       if (response.statusCode == 200) {
-//         SharedPreferences prefs = await SharedPreferences.getInstance();
-//         await prefs.setString('access_token', response.data['access_token']);
-//         prefs.remove('access_token');
-//         return ResultCodes.success;
-//       }
-//     } on DioException catch (e) {
-//       if (e.response?.statusCode == 401) {
-//         return ResultCodes.incorrectData;
-//       } else if (e.response?.statusCode == null) {
-//         return ResultCodes.offlineServer;
-//       }
-//     }
-//     return ResultCodes.unknownError;
-//   }
-// }
+      var jsonResponse = convert.jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        return Success(jsonResponse);
+      }
+      return Failure(jsonResponse);
+    } catch (e) {
+      return const Failure({"message": "Erro interno"});
+    }
+  }
+}
