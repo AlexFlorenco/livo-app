@@ -15,6 +15,7 @@ export class AuthController {
     @HttpCode(HttpStatus.OK)
     @UseGuards(LocalAuthGuard)
     async signIn(@Request() request: AuthRequestModel) {
+        const { nome, email, id } = request.user;
         const payload = {
             sub: request.user.id,
             email: request.user.email,
@@ -22,7 +23,7 @@ export class AuthController {
         };
         const access_token = this.jwtService.sign(payload);
 
-        return { access_token };
+        return { access_token, id, nome, email };
     }
 
     @Get('test')
