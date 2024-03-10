@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:result_dart/result_dart.dart';
 
 import '../../../controllers/sign_in_controller.dart';
 import '../../../shared/constants/livo_colors.dart';

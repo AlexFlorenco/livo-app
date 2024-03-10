@@ -9,7 +9,7 @@ void main() {
   runApp(
     Provider<InitialPageStore>(
       create: (_) => InitialPageStore(),
-      child: LivoApp(),
+      child: const LivoApp(),
     ),
   );
 }
@@ -80,7 +80,7 @@ class LivoApp extends StatelessWidget {
         //   style: TextButton.styleFrom(backgroundColor: LivoColors.primaryColor),
         // ),
       ),
-      home: InitialPage(),
+      home: const InitialPage(),
     );
   }
 }
