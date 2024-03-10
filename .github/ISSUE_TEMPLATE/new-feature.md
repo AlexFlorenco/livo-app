@@ -2,7 +2,7 @@
 name: New Feature
 about: Issues de novas funcionalidades
 title: "[FEAT-XX] "
-labels: enhancement
+labels: ''
 assignees: AlexFlorenco
 
 ---
