@@ -41,7 +41,7 @@ class _UsersTableState extends State<UsersTable> {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.65,
+        height: MediaQuery.of(context).size.height * 0.63,
         width: MediaQuery.of(context).size.width * 0.58,
         constraints: const BoxConstraints(minWidth: 600),
         child: Column(

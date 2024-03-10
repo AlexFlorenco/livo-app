@@ -36,7 +36,8 @@ class EditUserDialog extends StatelessWidget {
 
     return AlertDialog(
       actionsPadding: const EdgeInsets.only(right: 18, bottom: 20),
-      contentPadding: EdgeInsets.only(left: 22, top: 22, right: 22, bottom: 0),
+      contentPadding:
+          const EdgeInsets.only(left: 22, top: 22, right: 22, bottom: 0),
       titleTextStyle: Theme.of(context).textTheme.headlineSmall,
       contentTextStyle: Theme.of(context).textTheme.bodyLarge,
       title: const Row(

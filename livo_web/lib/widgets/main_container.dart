@@ -22,7 +22,7 @@ class MainContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.6,
-      constraints: BoxConstraints(minWidth: 450),
+      constraints: const BoxConstraints(minWidth: 450),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(6),
         color: Colors.white,
