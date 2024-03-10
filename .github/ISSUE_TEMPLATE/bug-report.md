@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Describe this issue template's purpose here.
+about: Issues de reporte de bugs
 title: "[BUG-XX]"
 labels: bug
 assignees: AlexFlorenco

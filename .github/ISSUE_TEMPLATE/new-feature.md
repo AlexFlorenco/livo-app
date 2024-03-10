@@ -1,6 +1,6 @@
 ---
 name: New Feature
-about: Describe this issue template's purpose here.
+about: Issues de novas funcionalidades
 title: "[FEAT-XX] "
 labels: enhancement
 assignees: AlexFlorenco
