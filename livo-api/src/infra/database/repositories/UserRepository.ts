@@ -31,7 +31,7 @@ export class UserRepository {
 
     async readUsers(): Promise<ReadUserDTO[]> {
         const listUsers = await this.prisma.user.findMany();
-        const users = listUsers.map(user => new ReadUserDTO(user.id, user.nome, user.email));
+        const users = listUsers.map(user => new ReadUserDTO(user.id, user.nome, user.email, user.senha));
         return users;
 
     }
