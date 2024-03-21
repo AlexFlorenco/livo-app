@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:livo_app/widgets/social_auth_button_google.dart';
 import 'package:provider/provider.dart';
 
 import '../../../controllers/sign_in_controller.dart';
@@ -70,12 +71,23 @@ class _SignInFormState extends State<SignInForm> {
             },
             label: 'Entrar',
           ),
+          SocialAuthButtonGoogle(
+            onPressed: () {
+              try {
+                final user = controller.signInWithGoogle();
+                print(user);
+              } catch (e) {
+                print('erro');
+              }
+            },
+          ),
+          const SizedBox(height: 20),
           LivoTextButton(
             onPressed: () {
               store.toggleExpanded();
             },
             label: 'Voltar',
-          )
+          ),
         ],
       ),
     );

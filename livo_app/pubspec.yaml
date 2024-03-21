@@ -18,6 +18,9 @@ dependencies:
   result_dart: ^1.1.0
   widget_and_text_animator: ^1.1.5
   google_fonts: ^6.2.0
+  firebase_core: ^2.27.1
+  firebase_auth: ^4.17.9
+  google_sign_in: ^6.2.1
 
   cupertino_icons: ^1.0.6
 
@@ -34,6 +37,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/initial_bg.png
+    - assets/images/
+    - assets/logos/
   #   - images/a_dot_ham.jpeg
 

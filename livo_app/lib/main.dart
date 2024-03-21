@@ -4,8 +4,14 @@ import 'package:provider/provider.dart';
 import 'pages/initial_page/initial_page.dart';
 import 'pages/initial_page/store/initial_page_store.dart';
 import 'shared/constants/livo_colors.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     Provider<InitialPageStore>(
       create: (_) => InitialPageStore(),

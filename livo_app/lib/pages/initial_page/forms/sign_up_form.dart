@@ -9,6 +9,7 @@ import '../../../widgets/livo_text_button.dart';
 import '../../../widgets/livo_text_button_bg.dart';
 import '../../../widgets/livo_text_form_field.dart';
 import '../../../widgets/snackbar.dart';
+import '../../../widgets/social_auth_button_google.dart';
 import '../store/initial_page_store.dart';
 
 class SignUpForm extends StatefulWidget {
@@ -84,6 +85,17 @@ class _SignUpFormState extends State<SignUpForm> {
             },
             label: 'Cadastrar',
           ),
+          SocialAuthButtonGoogle(
+            onPressed: () {
+              try {
+                final user = controller.signUpWithGoogle();
+                print(user);
+              } catch (e) {
+                print('erro');
+              }
+            },
+          ),
+          const SizedBox(height: 20),
           LivoTextButton(
             onPressed: () {
               store.toggleExpanded();

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "231990476694",
+    "firebase_url": "https://livo-app-firebase-default-rtdb.firebaseio.com",
+    "project_id": "livo-app-firebase",
+    "storage_bucket": "livo-app-firebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:231990476694:android:bd42397867c792a43167b7",
+        "android_client_info": {
+          "package_name": "com.example.livo_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "231990476694-srn50jmrus1fg21cjpgsmpc50937k3sc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8xmucxSWALjVvlXEevtyv2-DvVN56H6Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "231990476694-srn50jmrus1fg21cjpgsmpc50937k3sc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
