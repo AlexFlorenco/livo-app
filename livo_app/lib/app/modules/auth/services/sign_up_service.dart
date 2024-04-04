@@ -1,7 +1,7 @@
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 
-import '../shared/constants/routes.dart';
+import '../../../core/routes/routes.dart';
 
 class SignUpService {
   Future<Map<String, dynamic>?> signUp(

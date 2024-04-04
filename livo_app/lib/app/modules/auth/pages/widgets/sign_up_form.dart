@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../controllers/sign_up_controller.dart';
-import '../../../shared/constants/livo_colors.dart';
-import '../../../widgets/livo_email_form_field.dart';
-import '../../../widgets/livo_password_form_field.dart';
-import '../../../widgets/livo_text_button.dart';
-import '../../../widgets/livo_text_button_bg.dart';
-import '../../../widgets/livo_text_form_field.dart';
-import '../../../widgets/snackbar.dart';
-import '../../../widgets/social_auth_button_google.dart';
-import '../store/initial_page_store.dart';
+import '../../controllers/sign_up_controller.dart';
+import '../../../../core/themes/livo_colors.dart';
+import '../../../../core/widgets/livo_email_form_field.dart';
+import '../../../../core/widgets/livo_password_form_field.dart';
+import '../../../../core/widgets/livo_text_button.dart';
+import '../../../../core/widgets/livo_text_button_bg.dart';
+import '../../../../core/widgets/livo_text_form_field.dart';
+import '../../../../core/widgets/snackbar.dart';
+import 'social_auth_button_google.dart';
+import '../../controllers/initial_page_store.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({super.key});

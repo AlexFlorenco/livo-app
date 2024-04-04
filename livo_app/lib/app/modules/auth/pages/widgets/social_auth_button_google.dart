@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../shared/constants/livo_colors.dart';
+import '../../../../core/themes/livo_colors.dart';
 
 class SocialAuthButtonGoogle extends StatelessWidget {
   const SocialAuthButtonGoogle({

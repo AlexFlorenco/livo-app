@@ -4,21 +4,21 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:widget_and_text_animator/widget_and_text_animator.dart';
 
-import '../../shared/constants/livo_colors.dart';
-import '../../widgets/livo_text_button.dart';
-import '../../widgets/livo_text_button_bg.dart';
-import 'forms/sign_in_form.dart';
-import 'store/initial_page_store.dart';
-import 'forms/sign_up_form.dart';
+import '../../../core/themes/livo_colors.dart';
+import '../../../core/widgets/livo_text_button.dart';
+import '../../../core/widgets/livo_text_button_bg.dart';
+import 'widgets/sign_in_form.dart';
+import '../controllers/initial_page_store.dart';
+import 'widgets/sign_up_form.dart';
 
-class InitialPage extends StatefulWidget {
-  const InitialPage({super.key});
+class AuthPage extends StatefulWidget {
+  const AuthPage({super.key});
 
   @override
-  State<InitialPage> createState() => _InitialPageState();
+  State<AuthPage> createState() => _AuthPageState();
 }
 
-class _InitialPageState extends State<InitialPage> {
+class _AuthPageState extends State<AuthPage> {
   @override
   Widget build(BuildContext context) {
     final store = Provider.of<InitialPageStore>(context);

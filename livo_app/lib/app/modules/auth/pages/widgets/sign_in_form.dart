@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:livo_app/widgets/social_auth_button_google.dart';
+import 'package:livo_app/app/modules/auth/pages/widgets/social_auth_button_google.dart';
 import 'package:provider/provider.dart';
 
-import '../../../controllers/sign_in_controller.dart';
-import '../../../shared/constants/livo_colors.dart';
-import '../../../widgets/livo_email_form_field.dart';
-import '../../../widgets/livo_password_form_field.dart';
-import '../../../widgets/livo_text_button.dart';
-import '../../../widgets/livo_text_button_bg.dart';
-import '../../../widgets/snackbar.dart';
-import '../../home_page/home_page.dart';
-import '../store/initial_page_store.dart';
+import '../../controllers/sign_in_controller.dart';
+import '../../../../core/themes/livo_colors.dart';
+import '../../../../core/widgets/livo_email_form_field.dart';
+import '../../../../core/widgets/livo_password_form_field.dart';
+import '../../../../core/widgets/livo_text_button.dart';
+import '../../../../core/widgets/livo_text_button_bg.dart';
+import '../../../../core/widgets/snackbar.dart';
+import '../../../home/pages/home_page.dart';
+import '../../controllers/initial_page_store.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({super.key});
