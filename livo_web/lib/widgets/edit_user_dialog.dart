@@ -167,11 +167,13 @@ class EditUserDialog extends StatelessWidget {
                 snackbarMessage = failure;
               });
             }
-
+            
+            if (context.mounted) {
             ScaffoldMessenger.of(context).showSnackBar(LivoSnackbar(
               feedbackColor: snackbarColor,
               message: snackbarMessage,
             ));
+            }
           },
         ),
       ],

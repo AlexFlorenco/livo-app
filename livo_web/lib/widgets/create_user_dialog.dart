@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:livo_app/controllers/users_page_controller.dart';
 
 import '../shared/constants/livo_colors.dart';
@@ -159,10 +157,13 @@ class CreateUserDialog extends StatelessWidget {
               });
             }
 
+            if (context.mounted) {
             ScaffoldMessenger.of(context).showSnackBar(LivoSnackbar(
               feedbackColor: snackbarColor,
               message: snackbarMessage,
             ));
+              
+            }
           },
         ),
       ],

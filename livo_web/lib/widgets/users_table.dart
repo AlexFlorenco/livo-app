@@ -26,7 +26,7 @@ class _UsersTableState extends State<UsersTable> {
     () async {
       String? response = await usersPageController.getUsers();
 
-      if (response != null) {
+      if (response != null && mounted) {
         ScaffoldMessenger.of(context).showSnackBar(LivoSnackbar(
           feedbackColor: LivoColors.dangerColor,
           message: response,

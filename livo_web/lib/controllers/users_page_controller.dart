@@ -1,7 +1,7 @@
 import 'package:get/state_manager.dart';
 import 'package:result_dart/result_dart.dart';
 
-import '../models/User.dart';
+import '../models/user_model.dart';
 import '../services/users_service.dart';
 
 class UsersPageController extends GetxController {

@@ -76,11 +76,13 @@ class DeleteUserDialog extends StatelessWidget {
               snackbarMessage = failure;
               Navigator.pop(context);
             });
-
+            
+            if (context.mounted) {
             ScaffoldMessenger.of(context).showSnackBar(LivoSnackbar(
               feedbackColor: snackbarColor,
               message: snackbarMessage,
             ));
+            }
           },
         ),
       ],
