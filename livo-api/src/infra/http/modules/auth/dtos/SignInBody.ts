@@ -1,14 +1,12 @@
-import { IsEmail, IsNotEmpty, IsString, MinLength } from "class-validator";
+import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
 
 export class SignInBody {
-    @IsNotEmpty()
-    @IsString()
-    @IsEmail()
-    email: string;
+  @IsNotEmpty()
+  @IsString()
+  @IsEmail()
+  email: string;
 
-    @IsString()
-    @MinLength(6)
-    senha: string;
+  @IsString()
+  @MinLength(6)
+  senha: string;
 }
-
-

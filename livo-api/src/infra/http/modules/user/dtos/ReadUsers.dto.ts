@@ -1,9 +1,8 @@
 export class ReadUserDTO {
-    constructor(
-        readonly id: String,
-        readonly nome: String,
-        readonly email: String,
-        readonly senha: String,
-    ) { }
-
+  constructor(
+    readonly id: string,
+    readonly nome: string,
+    readonly email: string,
+    readonly senha: string,
+  ) {}
 }
