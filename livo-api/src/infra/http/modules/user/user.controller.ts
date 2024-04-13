@@ -18,7 +18,7 @@ import { UserExceptionFilter } from 'src/infra/http/modules/user/filters/UserExc
 @Controller('users')
 @UseFilters(new UserExceptionFilter())
 export class UserController {
-  constructor(private userRepository: UserRepository) {}
+  constructor(private userRepository: UserRepository) { }
 
   @Post()
   @Public()
@@ -31,6 +31,8 @@ export class UserController {
     return {
       message: 'Usuário criado com sucesso',
       id: user.id,
+      nome: user.nome,
+      email: user.email,
     };
   }
 

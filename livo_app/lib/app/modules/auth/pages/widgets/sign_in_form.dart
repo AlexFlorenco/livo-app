@@ -23,6 +23,7 @@ class _SignInFormState extends State<SignInForm> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+
   SignInController controller = SignInController();
 
   @override
@@ -72,12 +73,27 @@ class _SignInFormState extends State<SignInForm> {
             label: 'Entrar',
           ),
           SocialAuthButtonGoogle(
-            onPressed: () {
-              try {
-                final user = controller.signInWithGoogle();
-                print(user);
-              } catch (e) {
-                print('erro');
+            onPressed: () async {
+              var result = await controller.signInWithGoogle();
+
+              if (result != null) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => HomePage(
+                      idUser: result.id,
+                      nameUser: result.name,
+                      photoUrl: result.photoUrl,
+                    ),
+                  ),
+                );
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  LivoSnackbar(
+                    feedbackColor: LivoColors.dangerColor,
+                    message: "Falhou!",
+                  ),
+                );
               }
             },
           ),
