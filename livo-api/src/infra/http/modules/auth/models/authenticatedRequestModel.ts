@@ -2,8 +2,8 @@ import { Request } from 'express';
 
 export class AuthenticatedRequestModel extends Request {
   user: {
-    id: string;
+    id: number;
     email: string;
-    nome: string;
+    name: string;
   };
 }

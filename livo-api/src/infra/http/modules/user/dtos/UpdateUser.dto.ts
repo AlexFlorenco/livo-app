@@ -4,11 +4,17 @@ import { PartialType } from '@nestjs/mapped-types';
 
 export class UpdateUserDTO extends PartialType(CreateUserDTO) {
   @IsOptional()
-  nome: string;
+  name: string;
 
   @IsOptional()
   email: string;
 
   @IsOptional()
-  senha: string;
+  password: string;
+
+  @IsOptional()
+  photoUrl: string;
+
+  @IsOptional()
+  gradeId: number;
 }

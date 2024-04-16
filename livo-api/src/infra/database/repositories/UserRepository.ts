@@ -5,14 +5,16 @@ import { ReadUserDTO } from 'src/infra/http/modules/user/dtos/ReadUsers.dto';
 
 @Injectable()
 export class UserRepository {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
-  async createUser(user: User): Promise<void> {
-    const { id, nome, email, senha } = user;
+  async createUser(name: string, email: string, password: string): Promise<any> {
+    // const { name, email, password } = user;
 
-    await this.prisma.user.create({
-      data: { id, nome, email, senha },
+    const user = await this.prisma.user.create({
+      data: { name, email, password },
     });
+
+    return user;
   }
 
   async findUserByEmail(email: string): Promise<User | null> {
@@ -25,10 +27,12 @@ export class UserRepository {
     if (!userFound) return null;
 
     const user = new User(
-      userFound.nome,
-      userFound.email,
-      userFound.senha,
       userFound.id,
+      userFound.name,
+      userFound.email,
+      userFound.password,
+      userFound.photoUrl ?? "",
+      userFound.gradeId ?? 0,
     );
 
     return user;
@@ -37,19 +41,19 @@ export class UserRepository {
   async readUsers(): Promise<ReadUserDTO[]> {
     const listUsers = await this.prisma.user.findMany();
     const users = listUsers.map(
-      (user) => new ReadUserDTO(user.id, user.nome, user.email, user.senha),
+      (user) => new ReadUserDTO(user.id, user.name, user.email, user.password),
     );
     return users;
   }
 
-  async updateUser(id: string, updatedData: Partial<User>): Promise<void> {
+  async updateUser(id: number, updatedData: Partial<User>): Promise<void> {
     await this.prisma.user.update({
       where: { id },
       data: updatedData,
     });
   }
 
-  async deleteUser(id: string): Promise<void> {
+  async deleteUser(id: number): Promise<void> {
     await this.prisma.user.delete({
       where: { id },
     });
