@@ -133,14 +133,14 @@ class CreateUserDialog extends StatelessWidget {
                 ),
           ),
           onPressed: () async {
-            String snackbarMessage = "";
+            List<dynamic> listMessages = [];
             Color snackbarColor = LivoColors.dangerColor;
 
             if (!formKey.currentState!.validate()) {
-              snackbarMessage = "Formulário inválido";
+              listMessages.add("Formulário inválido");
             } else if (passwordController.text !=
                 confirmpasswordController.text) {
-              snackbarMessage = "As senhas não coincidem";
+              listMessages.add("As senhas não coincidem");
             } else {
               var response = await controller.createUser(
                 nameController.text,
@@ -149,20 +149,23 @@ class CreateUserDialog extends StatelessWidget {
               );
 
               response.fold((success) {
-                snackbarMessage = success;
+                listMessages += success['message'];
                 snackbarColor = LivoColors.successColor;
                 Navigator.pop(context);
               }, (failure) {
-                snackbarMessage = failure;
+                print(listMessages);
+                print(failure['message']);
+                listMessages += failure['message'];
               });
             }
 
             if (context.mounted) {
-            ScaffoldMessenger.of(context).showSnackBar(LivoSnackbar(
-              feedbackColor: snackbarColor,
-              message: snackbarMessage,
-            ));
-              
+              for (var message in listMessages) {
+                ScaffoldMessenger.of(context).showSnackBar(LivoSnackbar(
+                  feedbackColor: snackbarColor,
+                  message: message,
+                ));
+              }
             }
           },
         ),

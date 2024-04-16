@@ -12,7 +12,7 @@ class DeleteUserDialog extends StatelessWidget {
   });
 
   final UsersPageController controller;
-  final String id;
+  final int id;
 
   @override
   Widget build(BuildContext context) {
@@ -76,12 +76,12 @@ class DeleteUserDialog extends StatelessWidget {
               snackbarMessage = failure;
               Navigator.pop(context);
             });
-            
+
             if (context.mounted) {
-            ScaffoldMessenger.of(context).showSnackBar(LivoSnackbar(
-              feedbackColor: snackbarColor,
-              message: snackbarMessage,
-            ));
+              ScaffoldMessenger.of(context).showSnackBar(LivoSnackbar(
+                feedbackColor: snackbarColor,
+                message: snackbarMessage,
+              ));
             }
           },
         ),

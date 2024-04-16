@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
-import 'package:livo_app/widgets/main_container.dart';
-import 'package:livo_app/widgets/create_user_dialog.dart';
 
 import '../../controllers/users_page_controller.dart';
+import '../../widgets/create_user_dialog.dart';
+import '../../widgets/main_container.dart';
 import '../../widgets/users_table.dart';
 
 class UsersPage extends StatefulWidget {

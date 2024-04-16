@@ -13,6 +13,7 @@ dependencies:
   http: ^1.2.1
   result_dart: ^1.1.0
   get: ^4.6.6
+  flutter_modular: ^6.3.2
 
   cupertino_icons: ^1.0.6
 

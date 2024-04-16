@@ -22,7 +22,7 @@ class UsersPageController extends GetxController {
     });
   }
 
-  AsyncResult<String, String> deleteUser(String id) async {
+  AsyncResult<String, String> deleteUser(int id) async {
     var response = await UsersService().deleteUser(id);
 
     return response.fold((success) async {
@@ -34,7 +34,7 @@ class UsersPageController extends GetxController {
   }
 
   AsyncResult<String, String> updateUser(
-      String id, String name, String email, String password) async {
+      int id, String name, String email, String password) async {
     var response = await UsersService().updateUser(id, name, email, password);
     int index = userList.indexWhere((user) => user.id == id);
 
@@ -52,15 +52,15 @@ class UsersPageController extends GetxController {
     });
   }
 
-  AsyncResult<String, String> createUser(
+  AsyncResult<Map<String, dynamic>, Map<String, dynamic>> createUser(
       String name, String email, String password) async {
     var response = await UsersService().createUser(name, email, password);
 
     return response.fold((success) async {
       await getUsers();
-      return Success(success['message']);
+      return Success(success);
     }, (failure) {
-      return Failure(failure['message']);
+      return Failure(failure);
     });
   }
 }
