@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'modules/auth/pages/auth_page.dart';
 import 'core/themes/livo_colors.dart';
 
 class LivoApp extends StatelessWidget {

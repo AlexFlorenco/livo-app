@@ -18,19 +18,21 @@ import { UserExceptionFilter } from 'src/infra/http/modules/user/filters/UserExc
 @Controller('users')
 @UseFilters(new UserExceptionFilter())
 export class UserController {
-  constructor(private userRepository: UserRepository) {}
+  constructor(private userRepository: UserRepository) { }
 
   @Post()
   @Public()
   async createUser(@Body() body: CreateUserDTO) {
-    const { nome, email, senha } = body;
-    const user = new User(nome, email, senha);
+    const { name, email, password } = body;
+    // const user = new User(name, email, password);
 
-    await this.userRepository.createUser(user);
+    const user = await this.userRepository.createUser(name, email, password);
 
     return {
       message: 'Usuário criado com sucesso',
       id: user.id,
+      name: user.name,
+      email: user.email,
     };
   }
 
@@ -44,8 +46,8 @@ export class UserController {
 
   @Put('/:id')
   @Public()
-  async updateUser(@Param('id') id: string, @Body() body: UpdateUserDTO) {
-    await this.userRepository.updateUser(id, body);
+  async updateUser(@Param('id') id: number, @Body() body: UpdateUserDTO) {
+    await this.userRepository.updateUser(Number(id), body);
 
     return {
       message: 'Usuário atualizado com sucesso',
@@ -54,8 +56,8 @@ export class UserController {
 
   @Delete('/:id')
   @Public()
-  async deleteUser(@Param('id') id: string) {
-    await this.userRepository.deleteUser(id);
+  async deleteUser(@Param('id') id: number) {
+    await this.userRepository.deleteUser(Number(id));
 
     return {
       message: 'Usuário removido com sucesso',

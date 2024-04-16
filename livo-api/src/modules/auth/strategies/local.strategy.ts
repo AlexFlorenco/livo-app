@@ -8,15 +8,15 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
   constructor(private userRepository: UserRepository) {
     super({
       usernameField: 'email',
-      passwordField: 'senha',
+      passwordField: 'password',
     });
   }
 
-  async validate(email: string, senha: string) {
+  async validate(email: string, password: string) {
     const user = await this.userRepository.findUserByEmail(email);
 
     if (user) {
-      if (senha == user.senha) return user;
+      if (password == user.password) return user;
     }
 
     throw new UnauthorizedException('E-mail ou senha incorretos');

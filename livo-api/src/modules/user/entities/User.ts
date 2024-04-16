@@ -1,52 +1,47 @@
-import { randomUUID } from 'crypto';
-
 export class User {
   private props: {
-    nome: string;
+    id: number;
+    name: string;
     email: string;
-    senha: string;
-    id: string;
+    password: string;
+    photoUrl: string | null;
+    gradeId: number | null;
   };
 
   constructor(
-    nome: string,
+    id: number,
+    name: string,
     email: string,
-    senha: string,
-    id: string = randomUUID(),
+    password: string,
+    photoUrl: string | null = null,
+    gradeId: number | null = null,
+
   ) {
     this.props = {
-      nome,
-      email,
-      senha,
       id,
+      name,
+      email,
+      password,
+      photoUrl,
+      gradeId,
     };
   }
 
-  get id(): string {
-    return this.props.id;
-  }
+  get id(): number { return this.props.id; }
+  set id(id: number) { this.props.id = id; }
 
-  get nome(): string {
-    return this.props.nome;
-  }
+  get name(): string { return this.props.name; }
+  set name(name: string) { this.props.name = name; }
 
-  set nome(nome: string) {
-    this.props.nome = nome;
-  }
+  get email(): string { return this.props.email; }
+  set email(email: string) { this.props.email = email; }
 
-  get email(): string {
-    return this.props.email;
-  }
+  get password(): string { return this.props.password; }
+  set password(password: string) { this.props.password = password; }
 
-  set email(email: string) {
-    this.props.email = email;
-  }
+  get photoUrl(): string | null { return this.props.photoUrl; }
+  set photoUrl(photoUrl: string) { this.props.photoUrl = photoUrl; }
 
-  get senha(): string {
-    return this.props.senha;
-  }
-
-  set senha(senha: string) {
-    this.props.senha = senha;
-  }
+  get gradeId(): number | null { return this.props.gradeId; }
+  set gradeId(gradeId: number) { this.props.gradeId = gradeId; }
 }

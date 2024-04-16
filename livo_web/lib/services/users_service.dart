@@ -23,7 +23,7 @@ class UsersService {
   }
 
   AsyncResult<Map<String, dynamic>, Map<String, dynamic>> deleteUser(
-      String id) async {
+      int id) async {
     const urlDeleteUser = Routes.urlDeleteUser;
 
     try {
@@ -41,14 +41,14 @@ class UsersService {
   }
 
   AsyncResult<Map<String, dynamic>, Map<String, dynamic>> updateUser(
-      String id, String name, String email, String senha) async {
+      int id, String name, String email, String password) async {
     const urlUpdateUser = Routes.urlUpdateUser;
 
     try {
       var response = await http.put(Uri.parse('$urlUpdateUser/$id'), body: {
-        "nome": name,
+        "name": name,
         "email": email,
-        "senha": senha,
+        "password": password,
       });
 
       Map<String, dynamic> jsonResponse = convert.jsonDecode(response.body);
@@ -68,9 +68,9 @@ class UsersService {
 
     try {
       var response = await http.post(Uri.parse(urlCreateUser), body: {
-        "nome": name,
+        "name": name,
         "email": email,
-        "senha": password,
+        "password": password,
       });
 
       Map<String, dynamic> jsonResponse = convert.jsonDecode(response.body);

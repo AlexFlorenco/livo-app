@@ -1,11 +1,15 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:result_dart/result_dart.dart';
 
+import '../interfaces/sign_up_with_google_interface.dart';
+import '../models/user_model.dart';
+import '../services/sign_up_firebase_service.dart';
 import '../services/sign_up_service.dart';
 
 class SignUpController {
-  Future<String?> signUp({
+  final ISignUpWithGoogle _signUpWithGoogle = FirebaseSignUpService();
+
+  AsyncResult<UserModel, String> signUp({
     required GlobalKey<FormState> formKey,
     required String name,
     required String email,
@@ -13,41 +17,34 @@ class SignUpController {
     required String passwordConfirmation,
   }) async {
     if (!formKey.currentState!.validate()) {
-      return "Formulário inválido";
+      return const Failure("Formulário inválido");
     } else if (password != passwordConfirmation) {
-      return "As senhas não coincidem";
+      return const Failure("As senhas não coincidem");
     }
 
     var response = await SignUpService().signUp(name, email, password);
 
-    if (response != null) {
-      return response["message"];
-    }
-
-    return null;
+    return response.fold(
+      (success) {
+        print(success);
+        var user = UserModel(
+          id: success['id'],
+          name: success['nome'],
+          email: success['email'],
+        );
+        print(user);
+        return Success(user);
+      },
+      (failure) => Failure(failure['message']),
+    );
   }
 
-  signUpWithGoogle() async {
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    final GoogleSignIn googleSignIn = GoogleSignIn();
+  Future<UserModel?> signUpWithGoogle() async {
+    var result = await _signUpWithGoogle.signUp();
 
-    try {
-      final GoogleSignInAccount? googleSignInAccount =
-          await googleSignIn.signIn();
-
-      if (googleSignInAccount != null) {
-        final GoogleSignInAuthentication googleSignInAuthentication =
-            await googleSignInAccount.authentication;
-
-        final AuthCredential credential = GoogleAuthProvider.credential(
-          idToken: googleSignInAuthentication.idToken,
-          accessToken: googleSignInAuthentication.accessToken,
-        );
-
-        await auth.signInWithCredential(credential);
-      }
-    } catch (e) {
-      print('error');
+    if (result != null) {
+      return result;
     }
+    return null;
   }
 }

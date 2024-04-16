@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../home/pages/home_page.dart';
 import '../../controllers/sign_up_controller.dart';
 import '../../../../core/themes/livo_colors.dart';
 import '../../../../core/widgets/livo_email_form_field.dart';
@@ -25,6 +26,7 @@ class _SignUpFormState extends State<SignUpForm> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _passwordConfirmationController = TextEditingController();
+
   SignUpController controller = SignUpController();
 
   @override
@@ -61,7 +63,7 @@ class _SignUpFormState extends State<SignUpForm> {
           const SizedBox(height: 22),
           LivoTextButtonBG(
             onPressed: () async {
-              String? apiResponse = await controller.signUp(
+              var apiResponse = await controller.signUp(
                 formKey: _formKey,
                 name: _nameController.text,
                 email: _emailController.text,
@@ -69,29 +71,47 @@ class _SignUpFormState extends State<SignUpForm> {
                 passwordConfirmation: _passwordConfirmationController.text,
               );
 
-              apiResponse != null
-                  ? ScaffoldMessenger.of(context).showSnackBar(
-                      LivoSnackbar(
-                        feedbackColor: LivoColors.dangerColor,
-                        message: apiResponse,
+              apiResponse.fold(
+                  (success) => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => HomePage(
+                            idUser: success.id,
+                            nameUser: success.name,
+                          ),
+                        ),
                       ),
-                    )
-                  : ScaffoldMessenger.of(context).showSnackBar(
-                      LivoSnackbar(
-                        feedbackColor: LivoColors.successColor,
-                        message: "Conta criada com sucesso!",
-                      ),
-                    );
+                  (failure) => ScaffoldMessenger.of(context).showSnackBar(
+                        LivoSnackbar(
+                          feedbackColor: LivoColors.dangerColor,
+                          message: failure,
+                        ),
+                      ));
             },
             label: 'Cadastrar',
           ),
           SocialAuthButtonGoogle(
-            onPressed: () {
-              try {
-                final user = controller.signUpWithGoogle();
-                print(user);
-              } catch (e) {
-                print('erro');
+            onPressed: () async {
+              var result = await controller.signUpWithGoogle();
+
+              if (result != null) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => HomePage(
+                      idUser: result.id,
+                      nameUser: result.name,
+                      photoUrl: result.photoUrl,
+                    ),
+                  ),
+                );
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  LivoSnackbar(
+                    feedbackColor: LivoColors.dangerColor,
+                    message: "Falhou!",
+                  ),
+                );
               }
             },
           ),

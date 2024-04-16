@@ -19,7 +19,7 @@ class EditUserDialog extends StatelessWidget {
   });
 
   final UsersPageController controller;
-  final String id;
+  final int id;
   final String name;
   final String email;
   final String password;
@@ -167,12 +167,12 @@ class EditUserDialog extends StatelessWidget {
                 snackbarMessage = failure;
               });
             }
-            
+
             if (context.mounted) {
-            ScaffoldMessenger.of(context).showSnackBar(LivoSnackbar(
-              feedbackColor: snackbarColor,
-              message: snackbarMessage,
-            ));
+              ScaffoldMessenger.of(context).showSnackBar(LivoSnackbar(
+                feedbackColor: snackbarColor,
+                message: snackbarMessage,
+              ));
             }
           },
         ),

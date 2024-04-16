@@ -97,7 +97,7 @@ class UsersTableHeader extends StatelessWidget {
 }
 
 class UsersTableItem extends StatelessWidget {
-  final String id;
+  final int id;
   final String name;
   final String email;
   final String password;
@@ -117,7 +117,8 @@ class UsersTableItem extends StatelessWidget {
     return Row(
       // mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        SizedBox(width: 100, child: Text(id, overflow: TextOverflow.ellipsis)),
+        SizedBox(
+            width: 100, child: Text('$id', overflow: TextOverflow.ellipsis)),
         const Spacer(),
         SizedBox(width: 150, child: Text(name)),
         const Spacer(),

@@ -1,11 +1,14 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:livo_app/app/modules/auth/interfaces/sign_in_with_google_interface.dart';
+import 'package:livo_app/app/modules/auth/models/user_model.dart';
 import 'package:result_dart/result_dart.dart';
 
+import '../services/sign_in_firebase_service.dart';
 import '../services/sign_in_service.dart';
 
 class SignInController {
+  final ISignInWithGoogle _signInWithGoogle = FirebaseSignInService();
+
   AsyncResult<Map<String, dynamic>, Map<String, dynamic>> signIn(
     GlobalKey<FormState> formKey,
     TextEditingController emailController,
@@ -21,27 +24,12 @@ class SignInController {
     );
   }
 
-  signInWithGoogle() async {
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    final GoogleSignIn googleSignIn = GoogleSignIn();
+  Future<UserModel?> signInWithGoogle() async {
+    var result = await _signInWithGoogle.signIn();
 
-    try {
-      final GoogleSignInAccount? googleSignInAccount =
-          await googleSignIn.signIn();
-
-      if (googleSignInAccount != null) {
-        final GoogleSignInAuthentication googleSignInAuthentication =
-            await googleSignInAccount.authentication;
-
-        final AuthCredential credential = GoogleAuthProvider.credential(
-          idToken: googleSignInAuthentication.idToken,
-          accessToken: googleSignInAuthentication.accessToken,
-        );
-
-        await auth.signInWithCredential(credential);
-      }
-    } catch (e) {
-      print('error');
+    if (result != null) {
+      return result;
     }
+    return null;
   }
 }

@@ -32,7 +32,9 @@ class SocialAuthButtonGoogle extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           height: 46,
           child: TextButton(
-            onPressed: () => onPressed(),
+            onPressed: () async {
+              onPressed();
+            },
             style: TextButton.styleFrom(
               elevation: 1,
               shadowColor: Colors.grey,

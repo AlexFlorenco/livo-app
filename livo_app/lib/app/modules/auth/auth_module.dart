@@ -1,5 +1,8 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:livo_app/app/modules/auth/interfaces/sign_in_with_google_interface.dart';
 import 'package:livo_app/app/modules/auth/pages/auth_page.dart';
+
+import 'services/sign_in_firebase_service.dart';
 
 class AuthModule extends Module {
   @override
@@ -9,6 +12,8 @@ class AuthModule extends Module {
 
   @override
   void binds(Injector i) {
+    i.addSingleton<ISignInWithGoogle>((i) => FirebaseSignInService());
+
     super.binds(i);
   }
 
