@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "homeworks",
+  "info": {
+    "singularName": "homework",
+    "pluralName": "homeworks",
+    "displayName": "Homework"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "deadline": {
+      "type": "datetime"
+    },
+    "grade": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::grade.grade",
+      "inversedBy": "homework"
+    }
+  }
+}
